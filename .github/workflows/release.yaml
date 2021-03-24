@@ -57,6 +57,9 @@ jobs:
         with:
           charts_dir: charts
           config: cr.yaml
+          owner: Aisuko
+          repo: charts-release
+          # For helm charts index
           charts_repo_url: https://aisuko.github.io/charts-release
         env:
           CR_TOKEN: "${{ secrets.TOKEN }}"
