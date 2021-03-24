@@ -56,7 +56,6 @@ jobs:
         uses: Aisuko/chart-releaser-action@v1.0.0-alpha.3
         with:
           charts_dir: charts
-          # config: cr.yaml
           owner: Aisuko
           repo: charts-release
           # For helm charts index
