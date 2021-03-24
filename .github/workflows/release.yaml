@@ -58,7 +58,5 @@ jobs:
           charts_dir: charts
           config: cr.yaml
           charts_repo_url: https://aisuko.github.io/charts-release
-          owner: aisuko
-          repo: charts-release
         env:
           CR_TOKEN: "${{ secrets.TOKEN }}"
