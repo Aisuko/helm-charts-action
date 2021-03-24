@@ -2,5 +2,3 @@
 sign: false
 # UID of the GPG key to use
 key: $GITHUB_ENV
-
-owner: layer5.io
