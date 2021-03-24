@@ -52,8 +52,8 @@ jobs:
         run: |
           helm repo add meshery https://meshery.io/charts/
 
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.1.0
+      - name: Helm Chart Releaser For Remote
+        uses: Aisuko/chart-releaser-action@v1.0.0-alpha.1
         with:
           charts_dir: charts
           config: cr.yaml
