@@ -55,7 +55,7 @@ jobs:
       - name: Helm Chart Releaser For Remote
         uses: Aisuko/chart-releaser-action@v1.0.0-alpha.4
         with:
-          charts_dir: charts
+          charts_dir: install
           owner: Aisuko
           repo: charts-release
           # For helm charts index
