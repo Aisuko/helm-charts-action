@@ -1,0 +1,21 @@
+dependencies:
+- name: meshery-istio
+  repository: ""
+  version: 2.0.1
+- name: meshery-linkerd
+  repository: ""
+  version: 2.0.1
+- name: meshery-consul
+  repository: ""
+  version: 2.0.1
+- name: meshery-kuma
+  repository: ""
+  version: 1.0.1
+- name: meshery-osm
+  repository: ""
+  version: 1.0.1
+- name: meshery-nsm
+  repository: ""
+  version: 1.0.1
+digest: sha256:b626e36f521f44eb9490e34628c3125c65b832b826f10d6725af9cea7e10bd6b
+generated: "2021-03-25T19:15:25.367313+08:00"
