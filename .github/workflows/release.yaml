@@ -60,7 +60,7 @@ jobs:
           repo: charts-release
           # For helm charts index
           charts_repo_url: https://aisuko.github.io/charts-release
-          pages_branch: gh-pages
+          pages_branch: master
           activity: pr
         env:
           CR_TOKEN: "${{ secrets.TOKEN }}"
