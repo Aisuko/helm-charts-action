@@ -53,7 +53,7 @@ jobs:
           helm repo add meshery https://meshery.io/charts/
 
       - name: Helm Chart Releaser For Remote
-        uses: Aisuko/chart-releaser-action@v1.0.0-alpha.8
+        uses: Aisuko/chart-releaser-action@v1.0.0-alpha.9
         with:
           charts_dir: install
           owner: Aisuko
