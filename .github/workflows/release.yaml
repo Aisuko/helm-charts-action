@@ -68,7 +68,6 @@ jobs:
       - name: Checkout remote repo and push the index.yaml of the chart
         run: |
           git clone https://.:${{ secrets.GITHUB_TOKEN }}@github.com/Aisuko/charts-release target
-          rm target\*
           cp /home/runner/work/helm-charts-action/helm-charts-action/.cr-index/index.yaml target
           git config user.name github-actions
           git config user.email github-actions@github.com
