@@ -66,15 +66,12 @@ jobs:
           CR_TOKEN: "${{ secrets.TOKEN }}"
       
       - name: Checkout remote repo and push the index.yaml of the chart
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-          repository: Aisuko/charts-release
-          token: ${{ secrets.TOKEN }}
-      - run: |
-          copy /home/runner/work/helm-charts-action/helm-charts-action/.cr-index/index.yaml .
+        run: |
+          git clone https://.:${{ secrets.GITHUB_TOKEN }}@github.com/Aisuko/charts-release target
+          rm target\*
+          cp /home/runner/work/helm-charts-action/helm-charts-action/.cr-index/index.yaml target
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
-          git commit -m "generated"
+          git commit -m "The new release of the charts"
           git push
