@@ -53,7 +53,7 @@ jobs:
           helm repo add meshery https://meshery.io/charts/
 
       - name: Helm Chart Releaser For Remote
-        uses: Aisuko/chart-releaser-action@v1.0.0-alpha.12
+        uses: Aisuko/chart-releaser-action@v1.0.0-alpha.13
         with:
           charts_dir: install
           owner: Aisuko
@@ -61,6 +61,20 @@ jobs:
           # For helm charts index
           charts_repo_url: https://aisuko.github.io/charts-release
           pages_branch: master
-          activity: pr
+          activity: none
         env:
           CR_TOKEN: "${{ secrets.TOKEN }}"
+      
+      - name: Checkout remote repo and push the index.yaml of the chart
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          repository: Aisuko/charts-release
+          token: ${{ secrets.TOKEN }}
+      - run: |
+          copy /home/runner/work/helm-charts-action/helm-charts-action/.cr-index/index.yaml .
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "generated"
+          git push
