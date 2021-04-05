@@ -22,6 +22,8 @@ jobs:
           token: ${{ secrets.TOKEN }}
 
       - name: Configure Git
+        env:
+          GITHUB_ACTOR: Aisuko
         run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
@@ -83,8 +85,8 @@ jobs:
       - name: Push
         env:
           REPO_PATH: charts-release
-          GIT_USERNAME: action
-          GIT_EMAIL: action@users.noreply.github.com
+          GIT_USERNAME: Aisuko
+          GIT_EMAIL: Aisuko@users.noreply.github.com
         run: |
           cd ${{ env.REPO_PATH }}
           git config --local user.name "${{ env.GIT_USERNAME }}"
