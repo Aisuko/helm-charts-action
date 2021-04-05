@@ -26,8 +26,10 @@ jobs:
           version: v3.4.1
       
       - name: Helm lint
+        env:
+          CHARTS_PATH: install/meshery
         run:
-          helm lint .
+          helm lint ${{ env.CHARTS_PATH }}
 
   release:
     runs-on: ubuntu-latest
