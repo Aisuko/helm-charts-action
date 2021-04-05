@@ -82,7 +82,7 @@ jobs:
         run:
           cp ${{ env.SOURCE }} ${{ env.TARGET }}
       - name: Push
-        runs: |
+        run: |
           cd ${{ env.REPO_PATH }}
           git add .
           git commit -m "Github Actions Automatically Built in `date +"%Y-%m-%d %H:%M"`"
