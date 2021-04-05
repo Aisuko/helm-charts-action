@@ -67,6 +67,7 @@ jobs:
       
       - name: Checkout remote repo and push the index.yaml of the chart
         run: |
+          git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
           git clone https://.:${{ secrets.GITHUB_TOKEN }}@github.com/Aisuko/charts-release target
           cp /home/runner/work/helm-charts-action/helm-charts-action/.cr-index/index.yaml target
           cd target
