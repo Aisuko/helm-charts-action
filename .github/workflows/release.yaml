@@ -74,4 +74,4 @@ jobs:
           git config user.email github-actions@github.com
           git add --all
           git commit -m "The new release of the charts"
-          git push -u origin master
+          git push --prune https://.:${{ secrets.GITHUB_TOKEN }}@github.com/Aisuko/charts-release
