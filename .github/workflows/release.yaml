@@ -31,24 +31,6 @@ jobs:
         with:
           version: v3.4.1
 
-      # Optional step if GPG signing is used
-      # - name: Prepare GPG key
-      #   run: |
-      #     gpg_dir=.cr-gpg
-      #     mkdir "$gpg_dir"
-
-      #     keyring="$gpg_dir/secring.gpg"
-      #     base64 -d <<< "$GPG_KEYRING_BASE64" > "$keyring"
-
-      #     passphrase_file="$gpg_dir/passphrase"
-      #     echo "$GPG_PASSPHRASE" > "$passphrase_file"
-
-      #     echo "CR_PASSPHRASE_FILE=$passphrase_file" >> "$GITHUB_ENV"
-      #     echo "CR_KEYRING=$keyring" >> "$GITHUB_ENV"
-      #   env:
-      #     GPG_KEYRING_BASE64: "${{ secrets.GPG_KEYRING_BASE64 }}"
-      #     GPG_PASSPHRASE: "${{ secrets.GPG_PASSPHRASE }}"
-
       - name: Add dependency chart repos
         run: |
           helm repo add meshery https://meshery.io/charts/
@@ -66,17 +48,35 @@ jobs:
         env:
           CR_TOKEN: "${{ secrets.TOKEN }}"
       
-      - name: Checkout remote repo and push the index.yaml of the chart
+      # - name: Checkout remote repo and push the index.yaml of the chart
+      #   env:
+      #     GIT_USERNAME: aisuko
+      #     GIT_EMAIL: aisuko-action@github.com
+      #     DEPLOY_URL: github.com/Aisuko/charts-release
+      #   run: |
+      #     git clone https://.:${{ secrets.TOKEN }}@github.com/Aisuko/charts-release target
+      #     cp /home/runner/work/helm-charts-action/helm-charts-action/.cr-index/index.yaml target
+      #     cd target
+      #     git config --local user.name "${{ env.GIT_USERNAME }}"
+      #     git config --local user.email "${{ env.GIT_EMAIL }}"
+      #     git add index.yaml
+      #     git commit -m "Github Actions Automatically Built in `date +"%Y-%m-%d %H:%M"`"
+      #     git push --force --quiet "https://${{ env.GIT_USERNAME }}:${{ secrets.TOKEN }}@${{ env.DEPLOY_URL }}" main:main
+
+
+      - name: Checkout target repo
+        uses: actions/checkout@v2
         env:
-          GIT_USERNAME: aisuko
-          GIT_EMAIL: aisuko-action@github.com
-          DEPLOY_URL: github.com/Aisuko/charts-release
+          REPO: Aisuko/charts-release
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.TOKEN }}
+          repository: "${{ env.REPO }}"
+          path: charts-release
+      - name: Push
         run: |
-          git clone https://.:${{ secrets.TOKEN }}@github.com/Aisuko/charts-release target
-          cp /home/runner/work/helm-charts-action/helm-charts-action/.cr-index/index.yaml target
-          cd target
-          git config --local user.name "${{ env.GIT_USERNAME }}"
-          git config --local user.email "${{ env.GIT_EMAIL }}"
-          git add index.yaml
+          cp /home/runner/work/helm-charts-action/helm-charts-action/.cr-index/index.yaml charts
+          git add .
           git commit -m "Github Actions Automatically Built in `date +"%Y-%m-%d %H:%M"`"
-          git push --force --quiet "https://${{ env.GIT_USERNAME }}:${{ secrets.TOKEN }}@${{ env.DEPLOY_URL }}" main:main
+          git push
+
