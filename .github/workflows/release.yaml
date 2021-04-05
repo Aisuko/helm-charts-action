@@ -81,6 +81,8 @@ jobs:
         run:
           cp ${{ env.SOURCE }} ${{ env.TARGET }}
       - name: Push
+        env:
+          REPO_PATH: charts-release
         run: |
           cd ${{ env.REPO_PATH }}
           git add .
