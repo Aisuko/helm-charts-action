@@ -86,7 +86,8 @@ jobs:
           git config --local user.email "${{ env.GIT_EMAIL }}"
           # cp /home/runner/work/helm-charts-action/helm-charts-action/.cr-index/index.yaml target
           # cd target
-          git add /home/runner/work/helm-charts-action/helm-charts-action/.cr-index/index.yaml 
+          cp /home/runner/work/helm-charts-action/helm-charts-action/.cr-index/index.yaml index.yaml
+          git add index.yaml 
           git commit -m "Github Actions Automatically Built in `date +"%Y-%m-%d %H:%M"`"
           git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
           git push --force --quiet "https://${{ env.GIT_USERNAME }}:${{ secrets.GITHUB_TOKEN }}@${{ env.DEPLOY_URL }}" main:main
