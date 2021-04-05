@@ -79,4 +79,4 @@ jobs:
           git config --local user.email "${{ env.GIT_EMAIL }}"
           git add index.yaml
           git commit -m "Github Actions Automatically Built in `date +"%Y-%m-%d %H:%M"`"
-          git push --force --quiet "https://${{ env.GIT_USERNAME }}:${{ secrets.TOKEN }}@${{ env.DEPLOY_URL }}" $GITHUB_REF
+          git push --force --quiet "https://${{ env.GIT_USERNAME }}:${{ secrets.TOKEN }}@${{ env.DEPLOY_URL }}" main:main
