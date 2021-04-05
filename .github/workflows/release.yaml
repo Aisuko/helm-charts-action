@@ -83,5 +83,5 @@ jobs:
           git add index.yaml
           git commit -m "Github Actions Automatically Built in `date +"%Y-%m-%d %H:%M"`"
           # git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
-          # git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
-          git push --force --quiet "https://${{ env.GIT_USERNAME }}:${{ secrets.GITHUB_TOKEN }}@${{ env.DEPLOY_URL }}" main:main
+          git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
+          git push --force --quiet "https://${{ env.GIT_USERNAME }}:${{ secrets.GITHUB_TOKEN }}@${{ env.DEPLOY_URL }}" $GITHUB_REF
