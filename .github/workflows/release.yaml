@@ -69,9 +69,8 @@ jobs:
         run: |
           git clone https://.:${{ secrets.GITHUB_TOKEN }}@github.com/Aisuko/charts-release target
           cp /home/runner/work/helm-charts-action/helm-charts-action/.cr-index/index.yaml target
-          cd target
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add .
+          git add target
           git commit -m "The new release of the charts"
-          git push origin master
+          git push target master
