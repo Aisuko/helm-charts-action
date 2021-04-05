@@ -2,7 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 38
+replicaCount: 39
 restartPolicy: Always
 
 image:

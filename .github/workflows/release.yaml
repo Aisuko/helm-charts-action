@@ -70,7 +70,7 @@ jobs:
         env:
           GIT_USERNAME: aisuko
           GIT_EMAIL: aisuko-action@github.com
-          DEPLOY_URL: github.com/Aisuko/charts-releas
+          DEPLOY_URL: github.com/Aisuko/charts-release
         run: |
 
           git clone https://.:${{ secrets.GITHUB_TOKEN }}@github.com/Aisuko/charts-release target
