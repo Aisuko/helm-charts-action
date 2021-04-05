@@ -72,22 +72,15 @@ jobs:
           GIT_EMAIL: aisuko-action@github.com
           DEPLOY_URL: github.com/Aisuko/charts-releas
         run: |
-          # git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
-          # git clone https://.:${{ secrets.GITHUB_TOKEN }}@github.com/Aisuko/charts-release target
-          # cp /home/runner/work/helm-charts-action/helm-charts-action/.cr-index/index.yaml target
-          # cd target
-          # git config --global user.email "action@github.com"
-          # git config --global user.name "Action"
-          # git add --all
-          # git commit -m "The new release of the charts"
+
+          git clone https://.:${{ secrets.GITHUB_TOKEN }}@github.com/Aisuko/charts-release target
+          cp /home/runner/work/helm-charts-action/helm-charts-action/.cr-index/index.yaml target
+          cd target
           # git push --prune https://.:${{ secrets.GITHUB_TOKEN }}@github.com/Aisuko/charts-release
 
           git config --local user.name "${{ env.GIT_USERNAME }}"
           git config --local user.email "${{ env.GIT_EMAIL }}"
-          # cp /home/runner/work/helm-charts-action/helm-charts-action/.cr-index/index.yaml target
-          # cd target
-          cp /home/runner/work/helm-charts-action/helm-charts-action/.cr-index/index.yaml index.yaml
-          git add index.yaml 
+          git add index.yaml
           git commit -m "Github Actions Automatically Built in `date +"%Y-%m-%d %H:%M"`"
           git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
           git push --force --quiet "https://${{ env.GIT_USERNAME }}:${{ secrets.GITHUB_TOKEN }}@${{ env.DEPLOY_URL }}" main:main
