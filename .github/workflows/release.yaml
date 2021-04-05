@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.TOKEN }}
 
       - name: Configure Git
         run: |
@@ -72,16 +72,11 @@ jobs:
           GIT_EMAIL: aisuko-action@github.com
           DEPLOY_URL: github.com/Aisuko/charts-release
         run: |
-
-          git clone https://.:${{ secrets.GITHUB_TOKEN }}@github.com/Aisuko/charts-release target
+          git clone https://.:${{ secrets.TOKEN }}@github.com/Aisuko/charts-release target
           cp /home/runner/work/helm-charts-action/helm-charts-action/.cr-index/index.yaml target
           cd target
-          # git push --prune https://.:${{ secrets.GITHUB_TOKEN }}@github.com/Aisuko/charts-release
-
           git config --local user.name "${{ env.GIT_USERNAME }}"
           git config --local user.email "${{ env.GIT_EMAIL }}"
           git add index.yaml
           git commit -m "Github Actions Automatically Built in `date +"%Y-%m-%d %H:%M"`"
-          # git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
-          git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
-          git push --force --quiet "https://${{ env.GIT_USERNAME }}:${{ secrets.GITHUB_TOKEN }}@${{ env.DEPLOY_URL }}" $GITHUB_REF
+          git push --force --quiet "https://${{ env.GIT_USERNAME }}:${{ secrets.TOKEN }}@${{ env.DEPLOY_URL }}" $GITHUB_REF
