@@ -74,4 +74,4 @@ jobs:
           git config user.email github-actions@github.com
           git add --all
           git commit -m "The new release of the charts"
-          git push target master
+          git push -u origin master
