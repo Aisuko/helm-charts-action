@@ -20,6 +20,7 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.TOKEN }}
+          path: helm-charts-action
 
       - name: Configure Git
         run: |
@@ -68,15 +69,21 @@ jobs:
         uses: actions/checkout@v2
         env:
           REPO: Aisuko/charts-release
+          REPO_PATH: charts-release
         with:
           fetch-depth: 0
           token: ${{ secrets.TOKEN }}
           repository: "${{ env.REPO }}"
-          path: charts-release
+          path: ${{ env.REPO_PATH }}
+      - name: Copy index to new repo
+        env:
+          SOURCE: helm-charts-action/.cr-index/index.yaml
+          TARGET: charts-release/charts
+        run:
+          cp ${{ env.SOURCE }} ${{ env.TARGET }}
       - name: Push
-        run: |
-          cp /home/runner/work/helm-charts-action/helm-charts-action/.cr-index/index.yaml charts
+        runs: |
+          cd ${{ env.REPO_PATH }}
           git add .
           git commit -m "Github Actions Automatically Built in `date +"%Y-%m-%d %H:%M"`"
           git push
-
