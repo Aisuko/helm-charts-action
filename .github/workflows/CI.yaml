@@ -97,7 +97,7 @@ jobs:
           repository: "${{ env.REPO }}"
           path: ${{ env.REPO_PATH }}
       - name: Copy File To Remote Repo and Push
-        uses: Aisuko/cp-push-remote-repo@v1.0.0-alpha.2
+        uses: Aisuko/cp-push-remote-repo@v1.0.0-alpha.3
         with:
           source: /home/runner/work/helm-charts-action/helm-charts-action/.cr-index/index.yaml
           target: charts-release/charts
